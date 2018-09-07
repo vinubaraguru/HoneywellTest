@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+  <a class="navbar-brand" style="color:red" routerLink="/dashboard">Honeywell Starwars</a>
+  <a style="margin-left: 78%;cursor: pointer; font-size: 20px;" class="navbar-brand" (click)="logout()">Logout</a>
+  <ul class="navbar-nav mr-auto">
+  </ul>
+</nav>
+<div style="padding-top: 100px;">
+    <div class="card" style="padding:20px;">
+      <img class="card-img-top" src='https://lumiere-a.akamaihd.net/v1/images/the-last-jedi-theatrical-poster-tall-a_6a776211.jpeg' style="height: 300px;" alt="Card image cap">
+      <div *ngIf="starwarMovieDetail; else elseBlock" class="card-body">
+        <h4 class="card-title text-center" style="color:red">{{starwarMovieDetail.title}}</h4>
+        <p class="card-text">{{starwarMovieDetail.opening_crawl}}</p>
+        <h5>Director: {{starwarMovieDetail.director}}</h5>
+        <h5>Producer: {{starwarMovieDetail.producer}}</h5>
+        <h6>Released On: {{starwarMovieDetail.release_date}}</h6>
+      </div>
+      <ng-template #elseBlock>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="text-center">
+          <ng-template #elseBlock>
+            <!-- <div *ngIf="!hasMyRefersError"> -->
+              <!-- <img [src]="loadingGif" width="50px" height="50px" style="border-radius: 50%;"> -->
+              <h6 style="color:red">Loading... Please wait</h6>
+            <!-- </div> -->
+          </ng-template>
+        </div>
+      </ng-template>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
