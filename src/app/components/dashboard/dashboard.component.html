@@ -5,29 +5,19 @@
       <li class="nav-item">
         <a class="nav-link" >Hello Vinu</a>
       </li>
-      <!-- <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
-          Dropdown link
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li> -->
     </ul>
   </div>
   <a style="margin-left: 60%;cursor: pointer; font-size: 20px;" class="navbar-brand" (click)="logout()">Logout</a>
 </nav>
 <div>
 <div>
-  <div class="col" style="padding-top:100px;">
+  <div class="col" style="padding-top:70px;">
     <div class="row">
+      <input type="text" class="form-control" placeholder="search by title..." #query (keyup)="fliter(query.value)" style="margin: 15px;">
       <div *ngIf="starwarMoviesList?.length>0; else elseBlock">
-        <div *ngFor="let starwarmovie of starwarMoviesList; let i=index">
+        <div *ngFor="let starwarmovie of filteredMoviesList; let i=index">
           <div style="padding:15px;cursor: pointer;">
-            <div class="card" (click)="viewStarwarmovieDetail(starwarmovie)">
+            <div class="card" (click)="viewStarwarmovieDetail(starwarmovie,i)">
               <div class="card-body">
                 <div class="container col-sm-12">
                   <div class="row">
@@ -36,7 +26,6 @@
                       <p class="card-text">{{starwarmovie.opening_crawl}}</p>
                       <p class="card-text"><small class="text-muted">Released on: {{starwarmovie.release_date}}</small></p>
                     </div>
-                    {{movieImage}}
                     <div class="col-sm-4">
                         <img class="card-img-bottom" src='https://lumiere-a.akamaihd.net/v1/images/the-last-jedi-theatrical-poster-tall-a_6a776211.jpeg' alt="Card image cap" style="height:150px;">
                     </div>

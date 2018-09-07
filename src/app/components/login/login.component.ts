@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
     loginstarwars(formData){
       if (formData.email && formData.email == 'vinu@gmail.com'){
         if (formData.password && formData.password == '12345') {
+          localStorage.setItem('logindata',formData);
           this.router.navigate(['/dashboard']);
         }else{
           this.invalidLoginErrorMessage = 'Authentication Failed'

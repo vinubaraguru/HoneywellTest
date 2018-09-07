@@ -26,11 +26,11 @@ export class MovieService {
     })
   }
 
-  getMovieDetails(): Observable<any> {
+  getMovieDetails(id): Observable<any> {
     return Observable.create(observer => {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      this.http.get('https://swapi.co/api/films/1',
+      this.http.get('https://swapi.co/api/films/'+id,
         {
           headers: headers
         })

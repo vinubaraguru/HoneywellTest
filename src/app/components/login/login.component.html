@@ -1,10 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
-  <a class="navbar-brand" routerLink="/">Honeywell Starwars</a>
-  <ul class="navbar-nav mr-auto">
-    <!-- <li class="nav-item">
-      <a class="nav-link" routerLink="/">Login</a>
-    </li> -->
-  </ul>
+  <a class="navbar-brand" routerLink="/" style="color:red">Honeywell Starwars</a>
 </nav>
 <div>
   
@@ -13,7 +8,7 @@
     </div>
     <div class="col-md-6">
       <div>
-        <h3 class="text-center">Login with you account</h3>
+        <h3 class="text-center">Login with your account</h3>
         <br>
       </div>
       <div class="card" style="padding:20px;">
@@ -25,7 +20,7 @@
             <label for="title">Email</label>
             <span style="color:red;"> * </span>
             <input type="text" id="email" name="email" ngModel #email="ngModel" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
-              required>
+              required autocomplete="off">
             <div class="red-text" *ngIf="email.touched && !email.valid">
               <div *ngIf="email.errors.required">Email id is required</div>
               <div *ngIf="email.errors.pattern">Invalid email address</div>
@@ -43,6 +38,11 @@
             <button class="btn btn-success" [disabled]='!f.valid'>Login</button>
           </div>
         </form>
+      </div>
+      <div class="text-center">
+        <p>Test Crdentials:
+        Email: vinu@gmail.com
+        Password:12345</p>
       </div>
     </div>
     <div class="col-md-3">

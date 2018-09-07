@@ -9,6 +9,7 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MovieService } from './service/movie.service';
 import { MoviedetailComponent } from './components/moviedetail/moviedetail.component';
+import { Authgaurd } from './authgaurd.service';
 
 
 @NgModule({
@@ -25,11 +26,11 @@ import { MoviedetailComponent } from './components/moviedetail/moviedetail.compo
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: LoginComponent },
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'movie', component: MoviedetailComponent }
+      { path: 'dashboard', component: DashboardComponent, canActivate: [Authgaurd] },
+      { path: 'movie', component: MoviedetailComponent, canActivate: [Authgaurd] }
     ])
   ],
-  providers: [MovieService],
+  providers: [MovieService, Authgaurd],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

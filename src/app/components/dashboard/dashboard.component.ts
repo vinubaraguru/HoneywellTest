@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   starwarMoviesList: any;
+  filteredMoviesList: any[];
   movieImage:'https://lumiere-a.akamaihd.net/v1/images/solo-theatrical-poster-1000_27861ab7.jpeg'
 
   constructor(private movieService: MovieService, private router: Router) { }
@@ -17,21 +18,29 @@ export class DashboardComponent implements OnInit {
 
     this.movieService.getListofStarwarMovies()
       .subscribe(results => {
-        this.starwarMoviesList = results;
-        console.log(this.starwarMoviesList);
+        this.filteredMoviesList = this.starwarMoviesList = results;
       })
   }
 
-  viewStarwarmovieDetail(starwarmovie){
+  fliter(query: string) {
+    this.filteredMoviesList = (query) ?
+      this.starwarMoviesList.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) :
+      this.starwarMoviesList;
+  }
+
+  viewStarwarmovieDetail(starwarmovie,i){
     this.router.navigate(['/movie'],
       {
         queryParams:
-          { name:starwarmovie.title }
+          { 
+            name:starwarmovie.title,
+            id:(i+1) 
+          }
       });
-    console.log('cominghereeeeeeeeeeeeeeee')
   }
 
   logout(){
-     this.router.navigate(['/'])
+    localStorage.removeItem('logindata');
+    this.router.navigate(['/'])
   }
 }
