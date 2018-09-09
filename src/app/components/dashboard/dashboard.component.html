@@ -12,44 +12,61 @@
 <div>
 <div>
   <div class="col" style="padding-top:70px;">
+    <div *ngIf="starwarMovieError" class="text-center alert alert-danger body" style="margin: 10px;">
+      {{getStarwarMovieErrorMessage}}
+    </div>
     <div class="row">
-      <input type="text" class="form-control" placeholder="search by title..." #query (keyup)="fliter(query.value)" style="margin: 15px;">
-      <div *ngIf="starwarMoviesList?.length>0; else elseBlock">
-        <div *ngFor="let starwarmovie of filteredMoviesList; let i=index">
-          <div style="padding:15px;cursor: pointer;">
-            <div class="card" (click)="viewStarwarmovieDetail(starwarmovie,i)">
-              <div class="card-body">
-                <div class="container col-sm-12">
-                  <div class="row">
-                    <div class="col-sm-8">
-                      <h5 class="card-title" style="color:royalblue">{{starwarmovie.title}}</h5>
-                      <p class="card-text">{{starwarmovie.opening_crawl}}</p>
-                      <p class="card-text"><small class="text-muted">Released on: {{starwarmovie.release_date}}</small></p>
-                    </div>
-                    <div class="col-sm-4">
-                        <img class="card-img-bottom" src='https://lumiere-a.akamaihd.net/v1/images/the-last-jedi-theatrical-poster-tall-a_6a776211.jpeg' alt="Card image cap" style="height:150px;">
+      <div *ngIf="!starwarMovieError">
+        <div *ngIf="starwarMoviesList?.length>0; else elseBlock">
+          <div style="margin: 15px;">
+            <input type="text" class="form-control" placeholder="search by title..." #query (keyup)="fliter(query.value)">
+          </div>
+          <div></div>
+            <button class="btn btn-info" (click)="sortMovieList()" style="margin-left:88%;">Sort by name</button>
+          </div>
+          <div *ngFor="let starwarmovie of filteredMoviesList; let i=index">
+            <div style="padding:15px;cursor: pointer;">
+              <div class="card" >
+                <div class="card-body">
+                  <div class="container col-sm-12" (click)="viewStarwarmovieDetail(starwarmovie,i)">
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <h5 class="card-title" style="color:royalblue" >{{starwarmovie.title}}</h5>
+                        <p class="card-text">{{starwarmovie.opening_crawl}}</p>
+                          <p class="card-text"><small class="text-muted">Released on: {{starwarmovie.release_date}}</small></p>
+                      </div>
+                      <div class="col-sm-4">
+                          <img class="card-img-bottom" src='https://lumiere-a.akamaihd.net/v1/images/the-last-jedi-theatrical-poster-tall-a_6a776211.jpeg' alt="Card image cap" style="height:150px;">
+                      </div>
                     </div>
                   </div>
+                    <div class="container col-sm-12">
+                      <div class="row">
+                        <div class="col-sm-10">
+                        </div>
+                        <div class="col-sm-2" style="padding-left:90px;">
+                          <button class="btn btn-danger" (click)="removeMovie(i)"><span class="glyphicon glyphicon-trash"></span>Delete</button>
+                        </div>
+                      </div>
+                    </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+      </div>
     </div>
-    <!-- <ng-template #elseBlock>
-      <div class="text-center text-muted body">
-        <div *ngIf="referrals?.length==0 else elseBlock1;">
-          <h6>No referrals data found</h6>
+    <ng-template #elseBlock>
+      <div class="text-center text-muted body" style="margin-top:200px;margin-left:400px;">
+        <div *ngIf="starwarMoviesList?.length==0 else elseBlock1;">
+          <h6>No Movies list found</h6>
         </div>
         <ng-template #elseBlock1>
-          <div *ngIf="!hasMyRefersError">
-            <img [src]="loadingGif" width="50px" height="50px" style="border-radius: 50%;">
+          <div *ngIf="!starwarMovieError">
+            <img src="../assets/icon/loader1_gif.gif" width="50px" height="50px" style="border-radius: 50%;">
             <h6>Loading... Please wait</h6>
           </div>
         </ng-template>
       </div>
-    </ng-template> -->
-
-
+    </ng-template>
   </div>
 </div>

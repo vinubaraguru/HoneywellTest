@@ -9,15 +9,27 @@ import { MovieService } from '../../service/movie.service';
 })
 export class MoviedetailComponent implements OnInit {
   starwarMovieDetail: any;
+  getStarwarMovieDetailErrorMessage;
+  starwarMovieDetailError;
+  isOnline: boolean = navigator.onLine
 
   constructor(private movieService: MovieService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     let id = this.route.snapshot.queryParamMap.get('id')
+    if (this.isOnline) {
     this.movieService.getMovieDetails(id)
       .subscribe(result => {
         this.starwarMovieDetail = result;
-      })
+      },
+      error => {
+        this.getStarwarMovieDetailErrorMessage = 'Something went wrong. Please Try again'
+        this.starwarMovieDetailError = true;
+      });
+    }else{
+      this.getStarwarMovieDetailErrorMessage = 'No Internet connection. Please enable and try again'
+      this.starwarMovieDetailError = true;
+    }
   }
 
   logout() {
